@@ -1,33 +1,62 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import type { ComponentType, LazyExoticComponent } from 'react'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import { tools } from '@/app/tools.registry'
+import GenericToolPage from '@/tools/generic/GenericToolPage'
 
-const ClockPage = lazy(() => import('@/tools/clock/ClockPage'))
-const StopwatchPage = lazy(() => import('@/tools/stopwatch/StopwatchPage'))
-const TimerPage = lazy(() => import('@/tools/timer/TimerPage'))
+const implementedToolPages: Partial<Record<string, LazyExoticComponent<ComponentType>>> = {
+  clock: lazy(() => import('@/tools/clock/ClockPage')),
+  stopwatch: lazy(() => import('@/tools/stopwatch/StopwatchPage')),
+  timer: lazy(() => import('@/tools/timer/TimerPage')),
+  'json-formatter': lazy(() => import('@/tools/json-formatter/JsonFormatterPage')),
+  'base64-encoder': lazy(() => import('@/tools/base64/Base64Page')),
+  'password-generator': lazy(() => import('@/tools/password-generator/PasswordGeneratorPage')),
+}
 
 function LoadingScreen() {
   return (
-    <div className="flex min-h-[400px] items-center justify-center rounded-3xl border border-zinc-800 bg-zinc-900">
-      <div className="text-zinc-400">Loading tool...</div>
+    <div className="glass-panel flex min-h-[360px] items-center justify-center p-8">
+      <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+      <span className="ml-4 text-zinc-300">ツールを読み込み中...</span>
     </div>
   )
 }
 
+function ToolRoute({ toolId }: { toolId: string }) {
+  const tool = tools.find((item) => item.id === toolId)
+
+  if (!tool) return <Navigate to="/tools/clock" replace />
+
+  const ImplementedTool = implementedToolPages[tool.id]
+
+  if (ImplementedTool) return <ImplementedTool />
+
+  return <GenericToolPage tool={tool} />
+}
+
 export default function AppRouter() {
+  const location = useLocation()
+
   return (
     <Suspense fallback={<LoadingScreen />}>
-      <Routes>
-        <Route path="/" element={<Navigate to="/tools/clock" replace />} />
-
-        <Route path="/tools/clock" element={<ClockPage />} />
-
-        <Route
-          path="/tools/stopwatch"
-          element={<StopwatchPage />}
-        />
-
-        <Route path="/tools/timer" element={<TimerPage />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 14, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -8, scale: 0.99 }}
+          transition={{ duration: 0.22, ease: 'easeOut' }}
+        >
+          <Routes location={location}>
+            <Route path="/" element={<Navigate to="/tools/clock" replace />} />
+            {tools.map((tool) => (
+              <Route key={tool.id} path={tool.path} element={<ToolRoute toolId={tool.id} />} />
+            ))}
+            <Route path="*" element={<Navigate to="/tools/clock" replace />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
     </Suspense>
   )
 }
