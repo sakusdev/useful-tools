@@ -1,0 +1,19 @@
+{
+  "name": "Useful Tools",
+  "short_name": "Tools",
+  "description": "Modern modular utility toolbox",
+  "theme_color": "#09090b",
+  "background_color": "#09090b",
+  "display": "standalone",
+  "start_url": "/useful-tools/",
+  "scope": "/useful-tools/",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/useful-tools/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
