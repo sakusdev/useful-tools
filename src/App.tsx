@@ -1,6 +1,6 @@
 import Sidebar from '@/components/layout/Sidebar'
 import BottomNav from '@/components/layout/BottomNav'
-import CommandPalette from '@/components/search/CommandPalette'
+import FloatingSearch from '@/components/search/FloatingSearch'
 import AppRouter from '@/app/router/AppRouter'
 
 export default function App() {
@@ -21,7 +21,7 @@ export default function App() {
             </p>
           </div>
 
-          <CommandPalette />
+          <FloatingSearch />
 
           <AppRouter />
         </div>
