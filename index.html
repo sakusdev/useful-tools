@@ -5,7 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="/useful-tools/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#09090b" />
+    <meta name="view-transition" content="same-origin" />
     <link rel="manifest" href="/useful-tools/manifest.webmanifest" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              zinc: {
+                950: '#09090b',
+              },
+            },
+          },
+        },
+      }
+    </script>
+
     <title>Useful Tools</title>
   </head>
 
