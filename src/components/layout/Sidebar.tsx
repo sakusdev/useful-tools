@@ -3,15 +3,20 @@ import { groupedTools, tools } from '@/app/tools.registry'
 
 export default function Sidebar() {
   return (
-    <aside className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/85 backdrop-blur-2xl lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:w-80 lg:border-b-0 lg:border-r">
-      <div className="p-5 lg:p-6">
-        <h1 className="text-2xl font-black tracking-tight text-white">Useful Tools</h1>
-        <p className="mt-2 text-sm text-zinc-400">{tools.length}+ 個のモジュラー utility toolbox</p>
+    <aside className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/90 backdrop-blur-2xl lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:w-80 lg:border-b-0 lg:border-r">
+      <div className="flex items-center justify-between gap-3 px-4 py-3 lg:block lg:p-6">
+        <div>
+          <h1 className="text-xl font-black tracking-tight text-white lg:text-2xl">Useful Tools</h1>
+          <p className="mt-1 text-xs text-zinc-400 lg:mt-2 lg:text-sm">{tools.length}+ utility tools</p>
+        </div>
+        <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-bold text-sky-200 lg:hidden">
+          PWA
+        </div>
       </div>
 
-      <nav className="flex gap-3 overflow-x-auto px-4 pb-5 lg:block lg:h-[calc(100vh-112px)] lg:space-y-4 lg:overflow-y-auto lg:px-3">
+      <nav className="hidden lg:block lg:h-[calc(100vh-112px)] lg:space-y-4 lg:overflow-y-auto lg:px-3 lg:pb-6">
         {groupedTools.map((group) => (
-          <section key={group.id} className="min-w-[260px] lg:min-w-0">
+          <section key={group.id}>
             <h2 className="mb-2 px-2 text-xs font-bold uppercase tracking-wider text-zinc-500">{group.name}</h2>
             <div className="space-y-2">
               {group.tools.map((tool) => (
