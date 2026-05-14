@@ -12,6 +12,16 @@ const implementedToolPages: Partial<Record<string, LazyExoticComponent<Component
   'json-formatter': lazy(() => import('@/tools/json-formatter/JsonFormatterPage')),
   'base64-encoder': lazy(() => import('@/tools/base64/Base64Page')),
   'password-generator': lazy(() => import('@/tools/password-generator/PasswordGeneratorPage')),
+  'url-encoder': lazy(() => import('@/tools/url/UrlCodecPage')),
+  'url-decoder': lazy(() => import('@/tools/url/UrlCodecPage')),
+  'uuid-generator': lazy(() => import('@/tools/uuid/UuidGeneratorPage')),
+  'hash-generator': lazy(() => import('@/tools/hash/HashGeneratorPage')),
+  'sha256-generator': lazy(() => import('@/tools/hash/HashGeneratorPage')),
+  'regex-tester': lazy(() => import('@/tools/regex/RegexTesterPage')),
+  'text-counter': lazy(() => import('@/tools/text/TextCounterPage')),
+  'case-converter': lazy(() => import('@/tools/text/CaseConverterPage')),
+  'timestamp-converter': lazy(() => import('@/tools/timestamp/TimestampConverterPage')),
+  'unix-time-converter': lazy(() => import('@/tools/timestamp/TimestampConverterPage')),
 }
 
 function LoadingScreen() {
