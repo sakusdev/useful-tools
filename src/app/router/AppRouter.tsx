@@ -22,6 +22,13 @@ const implementedToolPages: Partial<Record<string, LazyExoticComponent<Component
   'case-converter': lazy(() => import('@/tools/text/CaseConverterPage')),
   'timestamp-converter': lazy(() => import('@/tools/timestamp/TimestampConverterPage')),
   'unix-time-converter': lazy(() => import('@/tools/timestamp/TimestampConverterPage')),
+  'bpm-tapper': lazy(() => import('@/tools/audio/BpmTapperPage')),
+  metronome: lazy(() => import('@/tools/audio/MetronomePage')),
+  'midi-viewer': lazy(() => import('@/tools/audio/MidiViewerPage')),
+  'chord-finder': lazy(() => import('@/tools/audio/ChordFinderPage')),
+  'scale-finder': lazy(() => import('@/tools/audio/ScaleFinderPage')),
+  'frequency-generator': lazy(() => import('@/tools/audio/FrequencyGeneratorPage')),
+  'audio-visualizer': lazy(() => import('@/tools/audio/AudioVisualizerPage')),
 }
 
 function LoadingScreen() {
